@@ -22,9 +22,9 @@ func Obfp(input string, padding_bytes int) string {
 	h.Write([]byte(input))
 	bs := h.Sum(nil)
 
-	adverb_index := binary.BigEndian.Uint32(bs[0:4])
-	adjective_index := binary.BigEndian.Uint32(bs[4:8])
-	noun_index := binary.BigEndian.Uint32(bs[8:12])
+	adverb_index := binary.LittleEndian.Uint32(bs[0:4])
+	adjective_index := binary.LittleEndian.Uint32(bs[4:8])
+	noun_index := binary.LittleEndian.Uint32(bs[8:12])
 	bytes := bs[12 : 12+padding_bytes]
 
 	adverb := adverbs[adverb_index%uint32(len(adverbs))]
