@@ -14,9 +14,9 @@ func Obf(input string) string {
 // Obfp obfuscates the input string into a human readable hash with 0-8 padding_bytes at the end.
 func Obfp(input string, padding_bytes int) string {
 	if padding_bytes < 0 {
-		padding_bytes = 0
+		panic("padding_bytes cannot be negative.")
 	} else if padding_bytes > 8 {
-		padding_bytes = 8
+		panic("padding_bytes cannot exceed 8.")
 	}
 	h := sha1.New()
 	h.Write([]byte(input))

@@ -10,6 +10,24 @@ type testData struct {
 	expectedResult string
 }
 
+func TestNegativePadding(t *testing.T) {
+	defer func() {
+		if r := recover(); r == nil {
+			t.Errorf("The code did not panic")
+		}
+	}()
+	Obfp("hello", -42)
+}
+
+func TestHugePadding(t *testing.T) {
+	defer func() {
+		if r := recover(); r == nil {
+			t.Errorf("The code did not panic")
+		}
+	}()
+	Obfp("hello", 999)
+}
+
 func Test(t *testing.T) {
 	for _, test := range testCases {
 		result := Obfp(test.input, test.padding)
@@ -27,12 +45,7 @@ var testCases = [...]testData{
 		padding:        0,
 		expectedResult: "AbsentmindedlyMuscularChildhood",
 	},
-	// Test padding, positive and negative cases. Also, same input -> same output regardless of padding size.
-	{
-		input:          "asdf",
-		padding:        -42,
-		expectedResult: "HonestlyErgonomicSloth",
-	},
+	// Test padding, positive cases. Also, same input -> same output regardless of padding size.
 	{
 		input:          "asdf",
 		padding:        0,
@@ -51,11 +64,6 @@ var testCases = [...]testData{
 	{
 		input:          "asdf",
 		padding:        8,
-		expectedResult: "HonestlyErgonomicSloth5012F6C60B27661C",
-	},
-	{
-		input:          "asdf",
-		padding:        999,
 		expectedResult: "HonestlyErgonomicSloth5012F6C60B27661C",
 	},
 	// Test a few unique UUID:s
