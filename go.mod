@@ -1,3 +1,3 @@
-module github.com/LoggedFuSkater/golang
+module github.com/dochq/go-obfuscate
 
-go 1.14
+go 1.21
