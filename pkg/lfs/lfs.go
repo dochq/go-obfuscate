@@ -6,6 +6,15 @@ import (
 	"fmt"
 )
 
+// ObfStrings obfuscates the input strings into human readable hashes.
+func ObfStrings(inputs []string) []string {
+	result := make([]string, len(inputs))
+	for i, input := range inputs {
+		result[i] = Obf(input)
+	}
+	return result
+}
+
 // Obf obfuscates the input string into a human readable hash.
 func Obf(input string) string {
 	return Obfp(input, 0)
